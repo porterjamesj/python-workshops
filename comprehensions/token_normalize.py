@@ -17,4 +17,4 @@ def normalize_individual_text(tokens):
 
 example_input = ["Hi", "there", ".", chr(0) + chr(1) + "Asdf"]
 example_output = ["hi", "there", ".", "asdf"]
-assert(normalize_individual_text(example_input)) == example_output
+assert normalize_individual_text(example_input) == example_output
