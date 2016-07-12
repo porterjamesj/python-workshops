@@ -7,9 +7,11 @@ def normalize_individual_text(tokens):
     '''
     lowercased_list_of_tokens = []
     for token in tokens:
-        clean_token = filter(lambda c: c in printable, token)
-        lower_token = ''.join(map(lambda c: c.lower(), clean_token))
-        lowercased_list_of_tokens.append(lower_token)
+        clean_token = []
+        for c in token:
+            if c in printable:
+                clean_token.append(c.lower())
+        lowercased_list_of_tokens.append(''.join(clean_token))
     return lowercased_list_of_tokens
 
 
