@@ -3,12 +3,10 @@ import os
 
 def phonebook_load(filename):
     """load phonebook from file"""
-    pb = {}
-    with open(filename) as f:
-        for line in f:
-            name, number = line.rstrip('\n').split()
-            pb[name] = number
-    return pb
+    f = open(filename)
+    {name: number for name, number in
+     [line.rstrip("\n").split() for line in f]}
+    f.close()
 
 phonebook_path = os.path.join(os.path.dirname(__file__), "phonebook.txt")
 

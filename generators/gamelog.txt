@@ -1,0 +1,12 @@
+attack ranger sword dragon 3
+attack fighter sword goblin1 5
+attack fighter sword dragon 5
+attack dragon firebreath fighter 10
+attack dragon firebreath wizard 10
+heal fighter potion fighter 5
+attack ranger sword goblin2 5
+attack wizard magic_missile dragon 5
+attack ranger sword dragon 3
+attack dragon firebreath fighter 10
+attack dragon firebreath ranger 10
+heal wizard cure fighter 5
