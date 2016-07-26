@@ -119,6 +119,11 @@ hello()
 
 # what is going on here?
 
+# a decorator is just a function that takes a function and returns
+# another function. typically the function returned is a "modfied"
+# version of the function passed in as an argument, which generally
+# works by wrapping a call or calls to the function passed in
+
 # the above is exactly equivalent to:
 
 def hello():
@@ -127,6 +132,108 @@ def hello():
 hello = logged(hello)
 
 
+# "decorating" a function definition with `@someotherfunction` just
+# results in passing in the newly defined function into
+# `someotherfunction` and then assigned the return value of that call
+# to the name we specified in `def`.
+
+# so when we call `hello`, we get the logging lines like we did before:
+
+hello()
+
+
+# note that what the decorator does with the function passed in can be
+# anything or nothing at all. some examples:
+
+def just_make_this_return_three_dammit(f):
+    def returns_three():
+        return 3
+    return returns_three
+
+
+@just_make_this_return_three_dammit
+def add(x, y):
+    return x+y
+
+print add(10, 5) # => 3
+
+# admitedely not very useful, but hopefully illustrative
+
+# another one
+
+
+def twice(f):
+    def wrapped(x):
+        return [f(x), f(x)]
+    return wrapped
+
+
+@twice
+def square(x):
+    return x * x
+
+print square(4)  # => [16,16]
+
+
+# misc useful things to know about decorators
+
+# it's often handy to write decorators that accept and return
+# functions which accept any number of arguments this can be done
+# using python's "variadic arguments" feature, e.g. for our logging
+# example before:
+
+def logged(f):
+    name = f.__name__
+    def wrapper(*args):
+        print "about to call {}".format(name)
+        f(*args)
+        print "done calling {}".format(name)
+    return f
+
+
+# now it works with any number of arguments!
+
+@logged
+def square(x):
+    return return x*x
+
+
+@logged
+def add(x, y):
+    return x + y
+
+
+# if you read the source code of other people's decorators, you will
+# often seen written using `functools.wraps` on the wrapper function.
+# this is nothing magical, it just transfers metadata (like the
+# __name__ attribute we used above) about the wrapped function onto
+# the returned wrapper.
+
+# to illustrate the problem:
+
+print add.__name__  # => wrapper  :(
+
+
+# we can fix it using this decorator:
+
+from functools import wraps
+
+
+def logged(f):
+    name = f.__name__
+    @wraps(f)
+    def wrapper(*args):
+        print "about to call {}".format(name)
+        f(*args)
+        print "done calling {}".format(name)
+    return f
+
+
+@logged
+def add(x, y):
+    return x + y
+
+print add.__name__  # => add :)
 
 
 
