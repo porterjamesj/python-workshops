@@ -20,8 +20,8 @@ CACHE = {}
 while True:
     path = raw_input().strip()
     if path in CACHE:
-        print CACHE[path]
+        total = CACHE[path]
     else:
         total = count_bytes_in_directory(path)
         CACHE[path] = total
-        print total
+    print "{} GB".format(float(total)/1000000000)
