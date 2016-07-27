@@ -2,7 +2,8 @@
 
 # what does this mean?
 
-# it means we can treat them more-or-less like any other python values (strings, numbers, lists, dicts.)
+# it means we can treat them more-or-less like any other python values
+# (strings, numbers, lists, dicts.)
 
 # well what can we do with values in general?
 
