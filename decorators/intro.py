@@ -234,12 +234,3 @@ def add(x, y):
     return x + y
 
 print add.__name__  # => add :)
-
-
-
-# examples
-
-# timing
-# retrying (set up flaky server on my vps to use as an example?)
-# memoize
-#
